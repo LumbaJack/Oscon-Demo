@@ -1,0 +1,8 @@
+{
+	"@odata.id": "/redfish/v1/Telemetry/",
+	"@odata.type": "#Telemetry.Telemetry",
+	"Description": "Telemetry data for the rovers",
+	"Members": [],
+	"Members@odata.count": null,
+	"Name": "Telemetry"
+}

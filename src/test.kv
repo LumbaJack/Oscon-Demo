@@ -1,0 +1,166 @@
+#:kivy 1.7.0
+
+
+<RootWidget>: 
+	#FloatLayout as main layout
+
+	GridLayout:
+		
+		spacing: 34,0
+		#left,top,right,bottom
+		padding: 12,12,12,0
+		
+	    #Draw background first (declare color BEFORE drawing rectangle)
+	    canvas.before:
+	    
+	        Color: 
+	            rgba: 1,1,1,.8
+	        Rectangle:
+	        	id: background_rectangle
+	            pos: self.pos
+	            size: self.size
+	            
+	        #Background logo
+	        Rectangle:
+	            pos: self.center_x - (315/2), self.center_y - (132/2)
+	            size: 315, 132
+	            source: "img/HPElogotransparent.png"
+	            
+	        Color:
+	            rgba: 1,1,1,.24
+	        Rectangle:
+	            pos: self.center_x - 2,0
+	            size: 4, self.height
+	            
+	        Color:
+	        	rgba: 0,0,0,.2
+	        	
+	        #1st Screen background rectangle
+	        RoundedRectangle:
+	        	pos: root.x + 8, root.y - 60
+	        	size: self.center_x - 20, root.height
+	        	radius: [5,]
+	        	
+	        #2nd background rectangle
+	        RoundedRectangle:
+	        	pos: self.center_x + 12, root.y - 60
+	        	size: (root.width - self.center_x) - 20, root.height
+	        	radius: [5,]
+	     	
+	    #Column for gridlayout
+	    cols: 2
+	    
+	    #redundant
+	    background_color: .3,1,.1,1
+	
+	    #1st Display Text
+	    Label:
+	        font_name: "fonts/AvenirLTStd-Roman.otf"
+	        text: root.ui_data_model.a
+	        color: 1,1,1,1
+	        halign: 'left'
+	        valign: 'top'
+	        text_size: root.center_x - 30, root.height - 70
+	        padding_y: 90
+	        font_size: 16
+	        line_height: 1.2
+	    
+	    #2nd Display Text
+	    Label:
+	        font_name: "fonts/AvenirLTStd-Roman.otf"
+	        text: root.ui_data_model.b
+	        color: 1,1,1,1  
+	        halign: 'left'
+	        valign: 'top'
+	        text_size: (root.width - root.center_x) - 30, root.height - 70
+	        padding_y: 90
+	        font_size: 16
+	        line_height: 1.2
+	        
+	    #1st Button (Start)
+	    Button:
+	        size_hint: .2, .2
+	        text: "Start"
+	        background_color: 0.007,.69,.416,1
+	        background_normal: 'images/button_down.png'
+	        font_size: 36
+	        on_press: root.button_press()
+	        font_name: "fonts/FUTURBO_OT.otf"
+	    
+	    #2nd Button (Stop)
+	    Button:
+	        size_hint: .2, .2
+	        text: "Stop"
+	        background_color: .69,.07,.0078,1
+	        font_size: 36
+	        background_normal: 'images/button_down.png'
+	        on_press: root.button_press2()
+	        font_name: "fonts/FUTURBO_OT.otf"
+        
+#<DisplayOverlay>:
+
+	#Created two separate AnchorLayouts within Floatlayout
+	AnchorLayout:
+	
+        anchor_x: 'left'
+        anchor_y: 'top'
+		#padding: left, top, right, bottom
+		padding: 0,20,0,0
+
+        Label:
+        	id:loverlaylabel
+        	text: 'Rover One'
+        	size_hint_y: None
+        	text_size: self.width, None
+        	height: self.texture_size[1]
+        	color: 1,1,1,1
+        	halign: 'left'
+        	font_size: 30
+        	font_name: "fonts/FUTURBO_OT.otf"
+        	padding_y: 6
+        	
+        	canvas.before:
+        	
+        		Color:
+        			#Blue
+        			#rgba: 0.168,0.792,1,.8
+        			#rgba: 0.0078,.47,.698,.6
+        			rgba: .259, .333,.39,.6
+        			
+        		RoundedRectangle:
+        			size: 300, 42
+        			pos: self.x - 30, self.y
+        			radius: [20,]
+
+
+    AnchorLayout:
+    
+        anchor_x: 'right'
+        anchor_y: 'top'
+        padding: 0,20,0,0
+        
+        Label:
+        	id:roverlaylabel
+        	text: 'Rover Two'
+        	size_hint_y: None
+        	text_size: self.width, None
+        	height: self.texture_size[1]
+        	color: 1,1,1,1
+        	halign: 'right'
+        	font_size: 30
+        	font_name: "fonts/FUTURBO_OT.otf"
+        	padding_y: 6
+        	
+        	canvas.before:
+        	
+        		Color:
+        			#Orange
+        			#rgba: 1, 0.376, 0.1686, .8
+        			#rgba: 0.0078,0.698,0.235,.6
+        			rgba: 0.0078,0.698,0.59,.6
+        			
+        		RoundedRectangle:
+        			size: 300, 42
+        			pos: (root.width - 210) - 70, self.y
+        			radius: [20,]
+        			

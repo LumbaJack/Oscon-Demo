@@ -1,2 +1,2 @@
-# oscon-demo
-oscon-demo
+# OSCON-Demo
+OSCON Demo
