@@ -24,7 +24,6 @@ class iLORest(APIHandler):
         self.gethandler = getData()
         self.posthandler = postData()
         self.deletehandler = deleteData()
-        self.uservalidation = userValidation()
 
     def get(self, path):            
         try:
