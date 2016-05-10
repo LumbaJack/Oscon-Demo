@@ -62,6 +62,9 @@ class iLORest(APIHandler):
             LOGGER.exception("GET: %s", excp)
             raise APIError(409, log_message=excp)
 
+        self.add_header('Access-Control-Allow-Origin', '*')
+        self.add_header('Access-Control-Allow-Headers', '*')
+        self.add_header('Access-Control-Allow-Methods', 'GET POST DELETE')
         self.write(data)
 
     def post(self, path):
@@ -90,6 +93,9 @@ class iLORest(APIHandler):
             LOGGER.exception("POST: %s", excp)
             raise APIError(409, log_message=excp)
 
+        self.add_header('Access-Control-Allow-Origin', '*')
+        self.add_header('Access-Control-Allow-Headers', '*')
+        self.add_header('Access-Control-Allow-Methods', 'GET POST DELETE')
         self.write(data)
 
     def delete(self, path):
@@ -108,5 +114,8 @@ class iLORest(APIHandler):
             LOGGER.exception("DELETE: %s", excp)
             raise APIError(409, log_message=excp)
 
+        self.add_header('Access-Control-Allow-Origin', '*')
+        self.add_header('Access-Control-Allow-Headers', '*')
+        self.add_header('Access-Control-Allow-Methods', 'GET POST DELETE')
         self.write(data)
 
