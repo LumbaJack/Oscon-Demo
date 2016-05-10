@@ -1,17 +1,16 @@
 import kivy
-from kivy.uix.floatlayout import FloatLayout
 kivy.require('1.7.0')
 
 from kivy.app import App
-from kivy.lang import Builder   
+from kivy.lang import Builder
 from kivy.event import EventDispatcher
 from kivy.uix.gridlayout import GridLayout
 from kivy.properties import StringProperty
 
 class DataModel(object):
     def __init__(self):
-        self.a = 'An quod ita callida est, ut optime possit architectari voluptates? Quodsi ipsam honestatem undique pertectam atque absolutam. Paria sunt igitur. Quorum sine causa fieri nihil putandum est. Ad corpus diceres pertinere-, sed ea, quae dixi, ad corpusne refers? Quis est, qui non oderit libidinosam, protervam adolescentiam? Illa tamen simplicia, vestra versuta. Non igitur potestis voluptate omnia dirigentes aut tueri aut retinere virtutem. \n\nQuid enim tanto opus est instrumento in optimis artibus comparandis? Graccho, eius fere, aequal? Ergo instituto veterum, quo etiam Stoici utuntur, hinc capiamus exordium. Hoc loco tenere se Triarius non potuit. Perturbationes autem nulla naturae vi commoventur, omniaque ea sunt opiniones ac iudicia levitatis.'
-        self.b = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quantum Aristoxeni ingenium consumptum videmus in musicis? Nam quid possumus facere melius? Laboro autem non sine causa; Apud ceteros autem philosophos, qui quaesivit aliquid, tacet; Duo Reges: constructio interrete. Sed nimis multa. Quo modo autem optimum, si bonum praeterea nullum est? Compensabatur, inquit, cum summis doloribus laetitia.'
+        self.a = 'This is a'
+        self.b = 'This is b'
 
 common_data_model = DataModel()
 
@@ -49,8 +48,24 @@ class UI_DataModel(EventDispatcher):
             return ret
         return wrapper
 
+Builder.load_string("""
+<RootWidget>:
+    cols: 1
+    Label:
+        text: root.ui_data_model.a
+    Label:
+        text: root.ui_data_model.b
+    Button:
+        size_hint: .2, .2
+        text: "Start"
+        on_press: root.button_press()
+    Button:
+        size_hint: .2, .2
+        text: "Stop"
+        on_press: root.button_press2()
+""")
 
-class RootWidget(FloatLayout):
+class RootWidget(GridLayout):
     ui_data_model = UI_DataModel()
 
     @ui_data_model.update
