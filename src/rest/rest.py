@@ -8,7 +8,6 @@ from tornado_rest.getoperations import getData
 from tornado_rest.postoperations import postData
 from tornado_rest.deleteoperations import deleteData
 from tornado_rest.requesthandlers import APIHandler
-from tornado_rest.uservalidation import userValidation
 
 LOGGER = logging.getLogger(__name__)
 
@@ -25,7 +24,6 @@ class iLORest(APIHandler):
         self.gethandler = getData()
         self.posthandler = postData()
         self.deletehandler = deleteData()
-        self.uservalidation = userValidation()
 
     def get(self, path):            
         try:
@@ -36,10 +34,6 @@ class iLORest(APIHandler):
             elif path.lower() == INDEX:
                 self.set_header('Allow', 'GET')
                 data = self.gethandler.redfish_v1()
-            elif not self.uservalidation.validate_users(\
-                                                    self.request.headers._dict):
-                self.set_status(401)
-                data = self.gethandler.not_authorized()
             elif path.lower() == RESOURCES:
                 self.set_header('Allow', 'GET')
                 data = self.gethandler.redfish_v1_resources()
@@ -102,11 +96,7 @@ class iLORest(APIHandler):
         try:
             path = REDFISH + path
 
-            if not self.uservalidation.validate_users(\
-                                                    self.request.headers._dict):
-                self.set_status(401)
-                data = self.gethandler.not_authorized(path)
-            elif path.lower().startswith(SESSIONS):
+            if path.lower().startswith(SESSIONS):
                 data = self.deletehandler.delete_sessions(path)
                 if not data:
                     self.set_status(400)
