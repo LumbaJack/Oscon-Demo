@@ -74,6 +74,10 @@ class APIHandler(BaseHandler):
 
     def set_default_headers(self):
         self.set_header('Content-Type', 'application/json')
+        self.add_header('Access-Control-Allow-Origin', '*')
+        self.add_header('Access-Control-Allow-Headers', '*')
+        self.add_header('Access-Control-Allow-Methods', '*')
+        
 
     def write_error(self, status_code, **kwargs):
         """Override of RequestHandler.write_error
