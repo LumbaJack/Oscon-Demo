@@ -5,8 +5,15 @@ import tornado.ioloop
 import logging.config
 import tornado.autoreload
 import tornado.httpserver
-from rest.rest import iLORest
 import tornado_rest.getoperations
+
+from rest.rest import iLORest
+from rest.mainhandler import MainHandler 
+
+dirname = os.path.dirname(__file__)
+
+STATIC_PATH = os.path.join(dirname, 'static')
+TEMPLATE_PATH = os.path.join(dirname, 'templates')
 
 class Application(tornado.web.Application):
     """Entry-point for the app
@@ -35,7 +42,7 @@ class Application(tornado.web.Application):
 
 def main():
     tornado_rest.getoperations.web_socket_client()
-    routes = [(r'/redfish/(.*)', iLORest)]
+    routes = [(r'/redfish/(.*)', iLORest), (r'/', MainHandler)]
     settings = {"debug": True, "cookie_secret":"+lyFdq7yVzOdpb1SIspHdfQ1SnZzB" \
                 "CJ0Xg9Sf8LsAxFQ1dzsOMGPC4SI18Ve/cUrjStcfYNLcWVjhHa8F0a77pohs" \
                 "N2DPV2sW+Y5zqnxeXAbX+9kbhiDNIkGbMdEJUfQHEBuuixxRpV3BcwmF065E" \

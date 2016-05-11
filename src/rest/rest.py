@@ -29,7 +29,9 @@ class iLORest(APIHandler):
         try:
             path = REDFISH + path
 
-            if not path.endswith("/"):
+            if not path == "index.html":
+                self.redirect(path + "/")
+            elif not path.endswith("/"):
                 self.redirect(path + "/")
             elif path.lower() == INDEX:
                 self.set_header('Allow', 'GET')
