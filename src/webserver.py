@@ -11,7 +11,9 @@ from rest.rest import iLORest
 from rest.mainhandler import MainHandler 
 
 dirname = os.path.dirname(__file__)
+
 STATIC_PATH = os.path.join(dirname, 'static')
+TEMPLATE_PATH = os.path.join(dirname, 'templates')
 
 class Application(tornado.web.Application):
     """Entry-point for the app
@@ -42,7 +44,7 @@ def main():
     tornado_rest.getoperations.web_socket_client()
     routes = [(r'/redfish/(.*)', iLORest), (r'/', MainHandler), \
           (r'/(.*)', tornado.web.StaticFileHandler, {'path': STATIC_PATH})]
-    settings = {"static_path": STATIC_PATH, 
+    settings = {"template_path": TEMPLATE_PATH, "static_path": STATIC_PATH, 
                 "debug": True, "cookie_secret":"+lyFdq7yVzOdpb1SIspHdfQ1SnZzB" \
                 "CJ0Xg9Sf8LsAxFQ1dzsOMGPC4SI18Ve/cUrjStcfYNLcWVjhHa8F0a77pohs" \
                 "N2DPV2sW+Y5zqnxeXAbX+9kbhiDNIkGbMdEJUfQHEBuuixxRpV3BcwmF065E" \
