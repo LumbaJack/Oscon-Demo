@@ -43,7 +43,8 @@ class Application(tornado.web.Application):
 def main():
     tornado_rest.getoperations.web_socket_client()
     routes = [(r'/redfish/(.*)', iLORest), (r'/', MainHandler)]
-    settings = {"debug": True, "cookie_secret":"+lyFdq7yVzOdpb1SIspHdfQ1SnZzB" \
+    settings = {"template_path": TEMPLATE_PATH, "static_path": STATIC_PATH, 
+                "debug": True, "cookie_secret":"+lyFdq7yVzOdpb1SIspHdfQ1SnZzB" \
                 "CJ0Xg9Sf8LsAxFQ1dzsOMGPC4SI18Ve/cUrjStcfYNLcWVjhHa8F0a77pohs" \
                 "N2DPV2sW+Y5zqnxeXAbX+9kbhiDNIkGbMdEJUfQHEBuuixxRpV3BcwmF065E" \
                 "1RTCo6halg07rwsS3iTtlI"}
