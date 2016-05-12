@@ -6,7 +6,7 @@ import logging.config
 import tornado.autoreload
 import tornado_rest.getoperations
 
-from rest.rest import iLORedfish
+from rest.redfish import iLORedfish
 from rest.mainhandler import MainHandler 
 
 dirname = os.path.dirname(__file__)

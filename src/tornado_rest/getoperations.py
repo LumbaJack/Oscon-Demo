@@ -77,4 +77,5 @@ class getData(object):
         with open("docs/error.json") as data_file:    
             data = json.load(data_file)
         data["error"]["@Message.ExtendedInfo"][0]["MessageArgs"] = [path]
+        return data
 
