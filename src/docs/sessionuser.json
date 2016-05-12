@@ -1,8 +1,0 @@
-{
-	"@odata.id": null,
-	"@odata.type": "#Session.1.0.0.Session",
-	"Description": "Manager User Session",
-	"Id": null,
-	"Name": "User Session",
-	"UserName": "admin"
-}
