@@ -43,21 +43,6 @@ class getData(object):
     def __init__(self):
         pass
 
-    def redfish_v1(self):
-        with open("docs/index.json") as data_file:    
-            data = json.load(data_file)
-        return data
-
-    def redfish_v1_session_service(self):
-        with open("docs/sessionservice.json") as data_file:    
-            data = json.load(data_file)
-        return data\
-    
-    def redfish_v1_resources(self):
-        with open("docs/resourcedirectory.json") as data_file:    
-            data = json.load(data_file)
-        return data
-
     def redfish_v1_telemetry(self): 
         global TELEMETRY_DATA
         with open("docs/telemetry.json") as data_file:    
@@ -87,48 +72,9 @@ class getData(object):
             return data
         except:
             return None
-    
-    def redfish_v1_session_service_sessions(self):
-        with open("docs/sessionservicesessions.json") as data_file:    
-            data = json.load(data_file)
-
-        with open("users.json") as data_file:    
-            usr_data= json.load(data_file)
-
-        data["Members@odata.count"] = len(usr_data)
-        
-        newmemberslist = []
-        for user in usr_data:
-            newmemberslist.append({"@odata.id": "/redfish/v1/Se" \
-                                         "ssionService/Sessions/" + user + "/"})
-
-        data["Members"] = newmemberslist
-        return data
-
-    def redfish_v1_session_users(self, path):
-        user = path.rsplit("/", 2)[-2]
-
-        with open("users.json") as data_file:    
-            usr_data= json.load(data_file)
-
-        if not user in usr_data:
-            return None   
-
-        with open("docs/sessionuser.json") as data_file:    
-            data = json.load(data_file)
-
-        data["@odata.id"] = path
-        data["Id"] = user
-        return data
 
     def not_found(self, path):
         with open("docs/error.json") as data_file:    
             data = json.load(data_file)
         data["error"]["@Message.ExtendedInfo"][0]["MessageArgs"] = [path]
-        return data
-
-    def not_authorized(self):
-        with open("docs/error_unauthorized.json") as data_file:    
-            data = json.load(data_file)
-        return data
 

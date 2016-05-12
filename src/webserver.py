@@ -4,10 +4,9 @@ import tornado.web
 import tornado.ioloop
 import logging.config
 import tornado.autoreload
-import tornado.httpserver
 import tornado_rest.getoperations
 
-from rest.rest import iLORest
+from rest.rest import iLORedfish
 from rest.mainhandler import MainHandler 
 
 dirname = os.path.dirname(__file__)
@@ -42,7 +41,7 @@ class Application(tornado.web.Application):
 
 def main():
     tornado_rest.getoperations.web_socket_client()
-    routes = [(r'/redfish/(.*)', iLORest), (r'/', MainHandler), \
+    routes = [(r'/redfish/(.*)', iLORedfish), (r'/', MainHandler), \
           (r'/(.*)', tornado.web.StaticFileHandler, {'path': STATIC_PATH})]
     settings = {"template_path": TEMPLATE_PATH, "static_path": STATIC_PATH, 
                 "debug": True, "cookie_secret":"+lyFdq7yVzOdpb1SIspHdfQ1SnZzB" \
@@ -50,12 +49,7 @@ def main():
                 "N2DPV2sW+Y5zqnxeXAbX+9kbhiDNIkGbMdEJUfQHEBuuixxRpV3BcwmF065E" \
                 "1RTCo6halg07rwsS3iTtlI"}
     application = Application(routes=routes, settings=settings)
-    http_server = tornado.httpserver.HTTPServer(application, ssl_options={
-        "certfile": os.path.join("ca.crt"),
-        "keyfile": os.path.join("ca.key"),
-    })
-
-    http_server.listen(4443)
+    application.listen(5000)
     ioloop = tornado.ioloop.IOLoop.instance()
     if debug:
         tornado.autoreload.start(ioloop)
