@@ -33,7 +33,7 @@ class web_socket_client(object):
         """ Method that runs forever """
         while True:
             socketIO = SocketIO(
-                'test-sensors-server.herokuapp.com',
+                'rover-sensors-data-provider.52.35.15.130.nip.io',
                 proxies={'https': 'http://proxy.compaq.com:8080'})
             socketIO.on('telemetry', self.set_telemetry_data)
             socketIO.wait()
