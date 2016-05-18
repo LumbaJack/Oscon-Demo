@@ -64,7 +64,7 @@ class getData(object):
             ret_data = collections.OrderedDict()
             ret_data["Name"] = "Telemetry Data"
             ret_data["Description"] = "Telemetry Data View"
-            ret_data["@odata.id"] = "/redfish/v1/Telemetry/1/"
+            ret_data["@odata.id"] = path
             ret_data["@odata.type"] = "#Telemetry.1.0.1.Telemetry"
             
             data = ret_data.copy()
